@@ -1,5 +1,7 @@
 # kanagawa-fuji.nvim
 
+![Katsushika Hokusai, South Wind, Clear Sky ("Red Fuji")](assets/red-fuji.jpg)
+
 I'm a huge fan of [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) -
 I've been using it for a while and genuinely love it. My only issue was its
 light variant: I found it hard to read, and it turns out stock
