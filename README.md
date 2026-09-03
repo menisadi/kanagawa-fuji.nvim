@@ -78,26 +78,7 @@ vim.cmd.colorscheme("kanagawa")
 
 kanagawa's light theme keeps its `lotus` name, but is now built from the
 fuji palette - so `background=light` gives you fuji, while `wave` and
-`dragon` stay untouched. Load order doesn't matter: the palette is
-re-applied on every `kanagawa.load()`, so your own `kanagawa.setup()` may
-come before or after this call, and any `lotus*` key you set yourself
-still wins.
-
-Note that `setup()` must actually be called - installing the plugin
-alongside kanagawa is not enough, since nothing would load it. Pass
-`setup({ override_lotus = false })` to register the palette without
-overriding `lotus`, which is what `:colorscheme kanagawa-fuji` does.
-
-### Notes
-
-If you enable kanagawa's `compile = true`, run `:KanagawaCompile` once
-after adding this - a cache compiled before the override is stale and
-takes precedence over the config.
-
-Because the tuning overrides the shared `lotus*` palette keys rather than
-introducing new ones, calling `:colorscheme kanagawa-lotus` after fuji has
-been loaded in the same session will also reflect these overrides. That's
-expected - it's how the underlying extension mechanism works.
+`dragon` stay untouched.
 
 ## Credits
 
