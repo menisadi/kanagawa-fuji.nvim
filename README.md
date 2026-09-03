@@ -1,22 +1,17 @@
 # kanagawa-fuji.nvim
 
-An unofficial, contrast- and hue-tuned `lotus` (light) variant for
-[kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim), inspired by
-Hokusai's *South Wind, Clear Sky* ("Red Fuji") - a companion piece to
-*The Great Wave off Kanagawa* in the *Thirty-Six Views of Mount Fuji*
-series.
+I'm a huge fan of [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) -
+I've been using it for a while and genuinely love it. My only issue was its
+light variant: I found it hard to read, and it turns out stock
+`kanagawa-lotus` fails WCAG AA contrast on most of its syntax colors
+against its own background.
 
-I am a huge fan of kanagawa.nvim theme. Been using it for some time and enjoying truly.
-The only issue I had was its light variant.
-I found it hard to read and parse.
-So, I ran some tests and it seems that stock `kanagawa-lotus` fails WCAG AA contrast on most of its syntax
-colors against its own background.
-This variant keeps the same soft,
-paper-like aesthetic but darkens/saturates the accent colors that need it
-and rotates two of them (`comment`, `identifier`) off the background's
-hue so they don't read as washed-out.
-See [PALETTE.md](PALETTE.md) for
-the full color table.
+kanagawa-fuji.nvim is my fix: a contrast- and hue-tuned take on `lotus`,
+inspired by Hokusai's *South Wind, Clear Sky* ("Red Fuji") - a companion
+piece to *The Great Wave off Kanagawa* in the *Thirty-Six Views of Mount
+Fuji* series. It keeps the same soft, paper-like aesthetic but
+darkens/saturates/rotates the accent colors that need it.
+See [PALETTE.md](PALETTE.md) for the full color table.
 
 This is **not** a fork of kanagawa.nvim and doesn't vendor any of its
 code - it's built entirely through the plugin's own `colors.palette`/
