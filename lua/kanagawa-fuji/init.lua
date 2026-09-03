@@ -48,7 +48,7 @@ end
 local load_wrapped = false
 
 --- Register the fuji palette with kanagawa.
----@param opts? { override_lotus?: boolean }
+---@param opts? { override_lotus?: boolean } `override_lotus` defaults to true
 ---@return boolean ok whether kanagawa was available
 function M.setup(opts)
 	opts = opts or {}
@@ -68,7 +68,7 @@ function M.setup(opts)
 
 	-- Re-inject on every load so the palette survives a kanagawa.setup() call
 	-- that happens after this one, whatever the plugin load order.
-	if opts.override_lotus and not load_wrapped then
+	if opts.override_lotus ~= false and not load_wrapped then
 		load_wrapped = true
 		local load = kanagawa.load
 		kanagawa.load = function(theme)

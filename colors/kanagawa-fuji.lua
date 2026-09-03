@@ -8,7 +8,9 @@ if not ok then
 	return
 end
 
-if not fuji.setup() then
+-- Selecting fuji explicitly only needs the palette, so skip the wrap around
+-- kanagawa.load() that the `lotus` override mode installs.
+if not fuji.setup({ override_lotus = false }) then
 	return
 end
 
