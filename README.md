@@ -7,7 +7,7 @@ Hokusai's *South Wind, Clear Sky* ("Red Fuji") - a companion piece to
 series.
 
 I am a huge fan of kanagawa.nvim theme. Been using it for some time and enjoying truly.
-The only issue I add was its light variant.
+The only issue I had was its light variant.
 I found it hard to read and parse.
 So, I ran some tests and it seems that stock `kanagawa-lotus` fails WCAG AA contrast on most of its syntax
 colors against its own background.
@@ -16,7 +16,7 @@ paper-like aesthetic but darkens/saturates the accent colors that need it
 and rotates two of them (`comment`, `identifier`) off the background's
 hue so they don't read as washed-out.
 See [PALETTE.md](PALETTE.md) for
-the full color table and some more info.
+the full color table.
 
 This is **not** a fork of kanagawa.nvim and doesn't vendor any of its
 code - it's built entirely through the plugin's own `colors.palette`/
