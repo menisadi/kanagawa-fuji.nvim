@@ -17,9 +17,7 @@ kanagawa.setup({
 	background = { light = "fuji" },
 	colors = {
 		palette = {
-			-- Backgrounds & UI (unchanged from the original Fuji-derived palette;
-			-- lotusWhite3 and several cool tones measured as near-exact matches
-			-- to actual pixels in the source painting - see PALETTE.md)
+			-- Backgrounds & UI
 			lotusInk1 = "#3b5159",
 			lotusWhite0 = "#b7bfb0",
 			lotusWhite1 = "#f1dcb7",
@@ -28,7 +26,7 @@ kanagawa.setup({
 			lotusWhite4 = "#d5ded4",
 			lotusWhite5 = "#d5ceb4",
 
-			-- Syntax accents (contrast- and hue-tuned for WCAG AA legibility)
+			-- Syntax accents
 			lotusGray3 = "#61707b",
 			lotusGreen = "#60726a",
 			lotusAqua = "#5d7277",
