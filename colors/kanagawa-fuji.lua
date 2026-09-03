@@ -8,12 +8,8 @@ if not ok then
 	return
 end
 
--- Selecting fuji explicitly only needs the palette, so skip the wrap around
--- kanagawa.load() that the `lotus` override mode installs.
-if not fuji.setup({ override_lotus = false }) then
+if not fuji.setup() then
 	return
 end
 
-local kanagawa = require("kanagawa")
-kanagawa.setup({ background = { light = "fuji" } })
-kanagawa.load("fuji")
+require("kanagawa").load("fuji")

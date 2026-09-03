@@ -37,17 +37,25 @@ M.palette = {
 	lotusAqua2 = "#547379",
 }
 
--- Merge the fuji palette *underneath* whatever is already configured, so an
--- explicit `lotus*` override in the user's kanagawa.setup() still wins. Writing
--- the merged table back makes this idempotent across repeated loads.
-local function inject_palette(kanagawa)
-	local colors = kanagawa.config.colors
-	colors.palette = vim.tbl_extend("force", M.palette, colors.palette or {})
+-- Register "fuji" as its own theme builder: kanagawa's `colors.palette` is
+-- global (it is merged before any builder runs), so applying the tuning here
+-- instead keeps it scoped to fuji and leaves stock `lotus` alone.
+--
+-- Precedence: kanagawa's palette < fuji tuning < the user's own `lotus*` keys.
+local function register_theme(kanagawa)
+	local themes = require("kanagawa.themes")
+	if themes.fuji then
+		return
+	end
+
+	local lotus = themes.lotus
+	themes.fuji = function(palette)
+		local user = kanagawa.config.colors.palette or {}
+		return lotus(vim.tbl_extend("force", palette, M.palette, user))
+	end
 end
 
-local load_wrapped = false
-
---- Register the fuji palette with kanagawa.
+--- Register the fuji theme with kanagawa.
 ---@param opts? { override_lotus?: boolean } `override_lotus` defaults to true
 ---@return boolean ok whether kanagawa was available
 function M.setup(opts)
@@ -59,22 +67,12 @@ function M.setup(opts)
 		return false
 	end
 
-	-- Register "fuji" as an alias of the built-in "lotus" builder so it can be
-	-- loaded and selected like any other kanagawa theme.
-	local themes = require("kanagawa.themes")
-	themes.fuji = themes.lotus
+	register_theme(kanagawa)
 
-	inject_palette(kanagawa)
-
-	-- Re-inject on every load so the palette survives a kanagawa.setup() call
-	-- that happens after this one, whatever the plugin load order.
-	if opts.override_lotus ~= false and not load_wrapped then
-		load_wrapped = true
-		local load = kanagawa.load
-		kanagawa.load = function(theme)
-			inject_palette(kanagawa)
-			return load(theme)
-		end
+	-- Resolve a light `background` to fuji instead of lotus. kanagawa.setup()
+	-- deep-extends, so this survives a later call from the user's own config.
+	if opts.override_lotus ~= false then
+		kanagawa.setup({ background = { light = "fuji" } })
 	end
 
 	return true
