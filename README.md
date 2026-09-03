@@ -59,10 +59,30 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 That's it - `colors/kanagawa-fuji.lua` registers a `fuji` theme (an alias
 of kanagawa's `lotus` builder) and applies the tuned palette in one call.
 
-Note: because the tuning overrides the shared `lotus*` palette keys
-rather than introducing new ones, calling `:colorscheme kanagawa-lotus`
-later in the same session will also reflect these overrides. That's
-expected - it's how the underlying extension mechanism works.
+### Overriding `lotus`
+
+If you'd rather keep `:colorscheme kanagawa` and only want its light side
+to be fuji, opt in from your config:
+
+```lua
+require("kanagawa-fuji").setup({ override_lotus = true })
+```
+
+kanagawa's light theme keeps its `lotus` name, but is now built from the
+fuji palette - so `:colorscheme kanagawa` with `background=light` gives you
+fuji, while `wave` and `dragon` stay untouched. Load order doesn't matter:
+the palette is re-applied on every `kanagawa.load()`, so your own
+`kanagawa.setup()` may come before or after this call, and any `lotus*` key
+you set yourself still wins.
+
+If you enable kanagawa's `compile = true`, run `:KanagawaCompile` once after
+adding this - a cache compiled before the override is stale and takes
+precedence over the config.
+
+Note: because the tuning overrides the shared `lotus*` palette keys rather
+than introducing new ones, calling `:colorscheme kanagawa-lotus` after fuji
+has been loaded in the same session will also reflect these overrides.
+That's expected - it's how the underlying extension mechanism works.
 
 ## Credits
 
