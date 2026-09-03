@@ -25,7 +25,7 @@ There are two ways to use it:
 - **As a colorscheme** - `:colorscheme kanagawa-fuji`, sitting alongside
   kanagawa's own `wave`, `dragon` and `lotus`.
 - **As a `lotus` override** - keep `:colorscheme kanagawa` and let this
-  plugin retune only its light variant, so `background=light` gives you
+  plugin swap its light variant for fuji, so `background=light` gives you
   fuji while `wave` and `dragon` stay untouched.
 
 ## Requirements
@@ -66,8 +66,8 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 vim.cmd.colorscheme("kanagawa-fuji")
 ```
 
-That's it - `colors/kanagawa-fuji.lua` registers a `fuji` theme (an alias
-of kanagawa's `lotus` builder) and applies the tuned palette in one call.
+That's it - `colors/kanagawa-fuji.lua` registers `fuji` as a kanagawa
+theme of its own, tuned from `lotus`, and loads it.
 
 ### As a `lotus` override
 
@@ -76,9 +76,9 @@ require("kanagawa-fuji").setup()
 vim.cmd.colorscheme("kanagawa")
 ```
 
-kanagawa's light theme keeps its `lotus` name, but is now built from the
-fuji palette - so `background=light` gives you fuji, while `wave` and
-`dragon` stay untouched.
+A light `background` resolves to fuji instead of lotus, while `wave` and
+`dragon` stay untouched. Stock lotus is still there as
+`:colorscheme kanagawa-lotus`.
 
 ## Credits
 
