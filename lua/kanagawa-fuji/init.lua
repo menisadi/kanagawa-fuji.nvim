@@ -4,9 +4,9 @@
 
 local M = {}
 
--- Every key here is a `lotus*` palette entry, and kanagawa only reads those
--- from its lotus theme builder, so injecting the whole table into the global
--- config leaves the wave and dragon themes untouched.
+-- Every key here is a `lotus*` palette entry. Fuji's theme builder below
+-- merges this table over kanagawa's own palette, so nothing outside the fuji
+-- theme ever sees these values.
 M.palette = {
 	-- Backgrounds & UI
 	lotusInk1 = "#3b5159",

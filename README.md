@@ -16,9 +16,8 @@ darkens/saturates/rotates the accent colors that need it.
 See [PALETTE.md](PALETTE.md) for the full color table.
 
 This is **not** a fork of kanagawa.nvim and doesn't vendor any of its
-code - it's built entirely through the plugin's own `colors.palette`/
-`colors.theme` extension API, and it depends on kanagawa.nvim being
-installed.
+code - fuji is registered as one more kanagawa theme, reusing its `lotus`
+builder, and it depends on kanagawa.nvim being installed.
 
 There are two ways to use it:
 
@@ -83,7 +82,7 @@ A light `background` resolves to fuji instead of lotus, while `wave` and
 ## Credits
 
 - [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) by
-  [rebelot](https://github.com/rebelot) - this variant is built entirely
-  on its public configuration API.
+  [rebelot](https://github.com/rebelot) - this variant reuses its `lotus`
+  theme builder rather than vendoring any code.
 - Katsushika Hokusai, *South Wind, Clear Sky* ("Red Fuji"), from
   *Thirty-Six Views of Mount Fuji*.

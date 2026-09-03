@@ -8,6 +8,10 @@ if not ok then
 	return
 end
 
+-- setup() also points kanagawa's light `background` at fuji. That is a global
+-- side effect of a plain :colorscheme, but it is needed: kanagawa.load() always
+-- sets g:colors_name = "kanagawa", so a later `:set background=light`
+-- re-sources colors/kanagawa.vim, which would otherwise fall back to lotus.
 if not fuji.setup() then
 	return
 end
