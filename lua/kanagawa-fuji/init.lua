@@ -10,7 +10,10 @@ local M = {}
 M.palette = {
 	-- Backgrounds & UI
 	lotusInk1 = "#3b5159",
-	lotusWhite0 = "#b7bfb0",
+	-- The pale-olive cluster rather than the sage one. Sage is closer to the
+	-- painting's midtones, but as the float, statusline and tabline background
+	-- it sat dark enough to sink the text on top of it.
+	lotusWhite0 = "#cfcfbb",
 	lotusWhite1 = "#f1dcb7",
 	lotusWhite2 = "#f2ecd1",
 	lotusWhite3 = "#fcf8ed",
@@ -35,6 +38,14 @@ M.palette = {
 	lotusOrange2 = "#7c645a",
 	lotusTeal3 = "#4d636a",
 	lotusAqua2 = "#547379",
+
+	-- VCS and non-text. Stock lotus leaves these bright and saturated, which
+	-- makes them the only unmuted colors in the theme and drops them below AA
+	-- on lotusWhite3. Re-derived from the Red Fuji clusters like the rest.
+	lotusGreen2 = "#5f7774",
+	lotusYellow3 = "#777262",
+	lotusRed2 = "#a4604f",
+	lotusViolet1 = "#758889",
 }
 
 -- Register "fuji" as its own theme builder: kanagawa's `colors.palette` is
@@ -51,8 +62,58 @@ local function register_theme(kanagawa)
 	local lotus = themes.lotus
 	themes.fuji = function(palette)
 		local user = kanagawa.config.colors.palette or {}
-		return lotus(vim.tbl_extend("force", palette, M.palette, user))
+		local theme = lotus(vim.tbl_extend("force", palette, M.palette, user))
+
+		-- Marker for the `overrides` below, which is global across themes and
+		-- must not repaint wave/dragon/lotus. Tagging the theme table rather
+		-- than reading kanagawa's `_CURRENT_THEME` keeps this correct under
+		-- `compile = true`, which builds every theme in one pass without
+		-- updating that field.
+		theme._fuji = true
+
+		return theme
 	end
+end
+
+-- Two groups kanagawa paints as a dark foreground on a color fuji deepened:
+--
+--   @comment.error = { fg = ui.fg, bg = diag.error }   -- lotusRed3
+--   Substitute     = { fg = ui.fg, bg = vcs.removed }  -- lotusRed2
+--
+-- Both are dark-on-dark once those become foreground-weight colors, and no
+-- palette value can fix that: the same key is a foreground everywhere else
+-- (DiagnosticError, @diff.minus, the diff and git signs). Repaint them with
+-- the cloud cream instead, which is how kanagawa already draws the sibling
+-- groups @comment.warning, @comment.note and @comment.todo.
+local FG_ON_DEEP = "#eadcbc"
+
+local function fuji_overrides(colors)
+	if not colors.theme._fuji then
+		return {}
+	end
+
+	return {
+		["@comment.error"] = { fg = FG_ON_DEEP, bg = colors.theme.diag.error, bold = true },
+		Substitute = { fg = FG_ON_DEEP, bg = colors.theme.vcs.removed },
+	}
+end
+
+-- kanagawa's config merge replaces function values outright, so `overrides`
+-- cannot be deep-extended the way `background` can. Compose by hand and keep
+-- the user's own overrides winning over fuji's.
+local composed
+
+local function register_overrides(kanagawa)
+	local previous = kanagawa.config.overrides
+	if previous == composed then
+		return
+	end
+
+	composed = function(colors)
+		return vim.tbl_extend("force", fuji_overrides(colors), previous(colors) or {})
+	end
+
+	kanagawa.setup({ overrides = composed })
 end
 
 --- Register the fuji theme with kanagawa.
@@ -68,6 +129,7 @@ function M.setup(opts)
 	end
 
 	register_theme(kanagawa)
+	register_overrides(kanagawa)
 
 	-- Resolve a light `background` to fuji instead of lotus. kanagawa.setup()
 	-- deep-extends, so this survives a later call from the user's own config.
