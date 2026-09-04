@@ -35,6 +35,14 @@ M.palette = {
 	lotusOrange2 = "#7c645a",
 	lotusTeal3 = "#4d636a",
 	lotusAqua2 = "#547379",
+
+	-- VCS and non-text. Stock lotus leaves these bright and saturated, which
+	-- makes them the only unmuted colors in the theme and drops them below AA
+	-- on lotusWhite3. Re-derived from the Red Fuji clusters like the rest.
+	lotusGreen2 = "#5f7774",
+	lotusYellow3 = "#777262",
+	lotusRed2 = "#a4604f",
+	lotusViolet1 = "#758889",
 }
 
 -- Register "fuji" as its own theme builder: kanagawa's `colors.palette` is
