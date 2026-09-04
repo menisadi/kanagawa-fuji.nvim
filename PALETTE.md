@@ -17,7 +17,7 @@ from its nearest cluster, so the hue stays the one Hokusai used.
 | palette key | hex |
 |---|---|
 | `lotusInk1` | `#3b5159` |
-| `lotusWhite0` | `#b7bfb0` |
+| `lotusWhite0` | `#cfcfbb` |
 | `lotusWhite1` | `#f1dcb7` |
 | `lotusWhite2` | `#f2ecd1` |
 | `lotusWhite3` | `#fcf8ed` |

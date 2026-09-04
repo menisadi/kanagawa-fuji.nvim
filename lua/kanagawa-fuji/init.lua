@@ -10,7 +10,10 @@ local M = {}
 M.palette = {
 	-- Backgrounds & UI
 	lotusInk1 = "#3b5159",
-	lotusWhite0 = "#b7bfb0",
+	-- The pale-olive cluster rather than the sage one. Sage is closer to the
+	-- painting's midtones, but as the float, statusline and tabline background
+	-- it sat dark enough to sink the text on top of it.
+	lotusWhite0 = "#cfcfbb",
 	lotusWhite1 = "#f1dcb7",
 	lotusWhite2 = "#f2ecd1",
 	lotusWhite3 = "#fcf8ed",
