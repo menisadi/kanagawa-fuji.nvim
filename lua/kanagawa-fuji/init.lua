@@ -51,8 +51,58 @@ local function register_theme(kanagawa)
 	local lotus = themes.lotus
 	themes.fuji = function(palette)
 		local user = kanagawa.config.colors.palette or {}
-		return lotus(vim.tbl_extend("force", palette, M.palette, user))
+		local theme = lotus(vim.tbl_extend("force", palette, M.palette, user))
+
+		-- Marker for the `overrides` below, which is global across themes and
+		-- must not repaint wave/dragon/lotus. Tagging the theme table rather
+		-- than reading kanagawa's `_CURRENT_THEME` keeps this correct under
+		-- `compile = true`, which builds every theme in one pass without
+		-- updating that field.
+		theme._fuji = true
+
+		return theme
 	end
+end
+
+-- Two groups kanagawa paints as a dark foreground on a color fuji deepened:
+--
+--   @comment.error = { fg = ui.fg, bg = diag.error }   -- lotusRed3
+--   Substitute     = { fg = ui.fg, bg = vcs.removed }  -- lotusRed2
+--
+-- Both are dark-on-dark once those become foreground-weight colors, and no
+-- palette value can fix that: the same key is a foreground everywhere else
+-- (DiagnosticError, @diff.minus, the diff and git signs). Repaint them with
+-- the cloud cream instead, which is how kanagawa already draws the sibling
+-- groups @comment.warning, @comment.note and @comment.todo.
+local FG_ON_DEEP = "#eadcbc"
+
+local function fuji_overrides(colors)
+	if not colors.theme._fuji then
+		return {}
+	end
+
+	return {
+		["@comment.error"] = { fg = FG_ON_DEEP, bg = colors.theme.diag.error, bold = true },
+		Substitute = { fg = FG_ON_DEEP, bg = colors.theme.vcs.removed },
+	}
+end
+
+-- kanagawa's config merge replaces function values outright, so `overrides`
+-- cannot be deep-extended the way `background` can. Compose by hand and keep
+-- the user's own overrides winning over fuji's.
+local composed
+
+local function register_overrides(kanagawa)
+	local previous = kanagawa.config.overrides
+	if previous == composed then
+		return
+	end
+
+	composed = function(colors)
+		return vim.tbl_extend("force", fuji_overrides(colors), previous(colors) or {})
+	end
+
+	kanagawa.setup({ overrides = composed })
 end
 
 --- Register the fuji theme with kanagawa.
@@ -68,6 +118,7 @@ function M.setup(opts)
 	end
 
 	register_theme(kanagawa)
+	register_overrides(kanagawa)
 
 	-- Resolve a light `background` to fuji instead of lotus. kanagawa.setup()
 	-- deep-extends, so this survives a later call from the user's own config.

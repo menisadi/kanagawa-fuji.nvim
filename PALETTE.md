@@ -44,3 +44,17 @@ higher-contrast while keeping the same soft, muted feel.
 | `lotusOrange2` | `#7c645a` |
 | `lotusTeal3` | `#4d636a` |
 | `lotusAqua2` | `#547379` |
+
+## Highlight overrides
+
+Two groups cannot be fixed from the palette, because kanagawa paints them as
+a dark foreground on a color this theme deepened into a foreground weight:
+
+| group | kanagawa's spec | fuji |
+|---|---|---|
+| `@comment.error` | `fg = ui.fg`, `bg = diag.error` | `fg = #eadcbc` |
+| `Substitute` | `fg = ui.fg`, `bg = vcs.removed` | `fg = #eadcbc` |
+
+`#eadcbc` is the cloud cream, and is already how kanagawa draws the sibling
+groups `@comment.warning`, `@comment.note` and `@comment.todo`. These apply
+to fuji only; `wave`, `dragon` and `lotus` keep their own.
