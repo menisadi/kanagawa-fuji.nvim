@@ -45,8 +45,8 @@ local palette = {
 
 	-- Neutral accent. Comment/deprecated color -- the previous value was almost
 	-- exactly as light as body text (contrast 1.0:1, no dimming at all);
-	-- lightened so it actually recedes (~2.3:1 against body text now).
-	lotusGray3 = "#919087",
+	-- lightened so it actually recedes (~2.9:1 against body text now).
+	lotusGray3 = "#a3a299",
 
 	-- UI surface, not a syntax swatch: Search/CurSearch/IncSearch and the
 	-- Pmenu scrollbar thumb sit *under* lotusInk1 rather than being read as

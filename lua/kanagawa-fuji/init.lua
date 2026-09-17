@@ -20,8 +20,8 @@ local palette = {
 
 	-- Syntax accents
 	-- Comment/deprecated color, lightened further from the image cluster so it
-	-- actually recedes from body text (was contrast 1.6:1 against it, now ~2.3:1).
-	lotusGray3 = "#798994",
+	-- actually recedes from body text (was contrast 1.6:1 against it, now ~2.9:1).
+	lotusGray3 = "#8b9ba6",
 	-- String color, re-saturated to the gamut boundary at the same hue/lightness
 	-- -- the image cluster left it almost gray (chroma 0.025 of a 0.110 ceiling).
 	lotusGreen = "#00815f",
