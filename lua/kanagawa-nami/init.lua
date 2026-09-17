@@ -3,42 +3,44 @@
 -- Hokusai's "The Great Wave off Kanagawa".
 -- Requires https://github.com/rebelot/kanagawa.nvim to be installed.
 
--- Every value here only moves lightness relative to stock lotus: hue and
--- chroma are held fixed (OKLCH), so the palette stays exactly as saturated
--- and exactly as many-hued as lotus, just dark enough on lotusWhite3 and on
--- lotus's own panel backgrounds (Visual, Pmenu, NormalFloat, CursorLine) to
--- clear AA.
+-- Same hue as stock lotus (OKLCH), but chroma is re-derived rather than
+-- inherited: holding it fixed while darkening gamut-clips it, which is what
+-- flattened the first cut of this palette. Each key is pushed back toward
+-- the sRGB gamut boundary, capped only where that would collide with a
+-- neighbouring hue (red/pink, yellow2/yellow3, teal1/teal3). Still clears
+-- full AA against lotusWhite3 and lotus's panel backgrounds, as before.
 local palette = {
 	-- Reds / pinks
-	lotusRed = "#a71c39",
+	lotusRed = "#a81838",
 	lotusRed2 = "#8e001a",
 	-- diag.error, reused unmuted by stock lotus at the same hex as
 	-- kanagawa's shared samuraiRed, but this is the key lotus actually reads.
 	lotusRed3 = "#b1000d",
-	lotusPink = "#8e3958",
+	lotusPink = "#943258",
 
 	-- Oranges / yellows
 	lotusOrange = "#864500",
 	lotusOrange2 = "#804900",
-	lotusYellow = "#5e5726",
-	lotusYellow2 = "#67532f",
+	lotusYellow = "#615700",
+	lotusYellow2 = "#68532c",
 	lotusYellow3 = "#764e00",
 
 	-- Greens / aquas / teals
-	lotusGreen = "#465d23",
-	lotusGreen2 = "#3e5e2f",
-	lotusAqua = "#3b5c57",
-	lotusAqua2 = "#385d53",
-	lotusTeal1 = "#1c5d72",
-	lotusTeal2 = "#2e5982",
-	lotusTeal3 = "#3e5a68",
+	lotusGreen = "#415f00",
+	lotusGreen2 = "#2b6200",
+	lotusAqua = "#006158",
+	lotusAqua2 = "#006251",
+	lotusTeal1 = "#1a5d72",
+	lotusTeal2 = "#005898",
+	lotusTeal3 = "#3b5a6a",
 
 	-- Blues / violets
-	lotusBlue4 = "#3c5687",
-	lotusBlue5 = "#534d97",
+	lotusBlue4 = "#0046cb",
+	lotusBlue5 = "#5900e6",
+	-- UI chrome, not a syntax role -- left at its original lightness-only value.
 	lotusViolet1 = "#585463",
 	lotusViolet2 = "#4a4062",
-	lotusViolet4 = "#624c82",
+	lotusViolet4 = "#7600c6",
 	lotusInk2 = "#42416a",
 
 	-- Neutral accent

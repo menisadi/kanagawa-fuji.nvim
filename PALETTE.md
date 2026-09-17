@@ -88,24 +88,38 @@ to fuji only; `wave`, `dragon` and `lotus` keep their own.
 
 ## nami
 
-Unlike fuji, nami isn't derived from an image: every key below only moves
-lightness relative to stock lotus's own value (in OKLCH) — hue and chroma
-are held fixed, so the theme stays exactly as saturated and exactly as
-many-hued as lotus, just dark enough on `lotusWhite3` and on lotus's own
-panel backgrounds (Visual, Pmenu, NormalFloat, CursorLine) to clear AA.
-Backgrounds & UI are untouched, so they're the same as stock lotus above.
+Unlike fuji, nami isn't derived from an image: every key below keeps stock
+lotus's own hue (in OKLCH). The first cut of nami went further and held
+chroma fixed too, but darkening a hue for contrast shrinks how much chroma
+sRGB can hold at that lightness, so carrying over lotus's original chroma
+silently gamut-clipped several hues toward the same low-saturation corner —
+which is what made that cut read as flat and hard to tell apart. Chroma is
+now re-derived instead: each syntax-role key is pushed back out toward the
+sRGB gamut boundary at its own lightness, as far as it can go without
+landing closer to another key than stock lotus's own hues already were. A
+few hue families stock lotus placed close together to begin with
+(red/pink, yellow2/yellow3, teal1/teal3 are all within ~10deg of a
+neighbour) can't be pulled much further apart by chroma alone without that
+collision, so those get a smaller, capped boost instead of the full one;
+everything else reaches full gamut saturation. Contrast is still checked
+the same way as before — full AA against `lotusWhite3` and against lotus's
+own panel backgrounds (Visual, Pmenu, NormalFloat, CursorLine). Backgrounds
+& UI are untouched, so they're the same as stock lotus above.
 
 ### Reds & pinks
 
 | palette key | hex |
 |---|---|
-| `lotusRed` | `#a71c39` |
+| `lotusRed` | `#a81838` |
 | `lotusRed2` | `#8e001a` |
 | `lotusRed3` | `#b1000d` |
-| `lotusPink` | `#8e3958` |
+| `lotusPink` | `#943258` |
 
 `lotusRed3` is `diag.error`, reused unmuted by stock lotus at the same hex
 as kanagawa's shared `samuraiRed` — but it's the key lotus actually reads.
+`lotusRed`/`lotusPink` are one of the hue families stock lotus placed close
+together (see above), so they get a smaller, capped boost rather than full
+gamut saturation.
 
 ### Oranges & yellows
 
@@ -113,31 +127,47 @@ as kanagawa's shared `samuraiRed` — but it's the key lotus actually reads.
 |---|---|
 | `lotusOrange` | `#864500` |
 | `lotusOrange2` | `#804900` |
-| `lotusYellow` | `#5e5726` |
-| `lotusYellow2` | `#67532f` |
+| `lotusYellow` | `#615700` |
+| `lotusYellow2` | `#68532c` |
 | `lotusYellow3` | `#764e00` |
+
+`lotusYellow2`/`lotusYellow3` are the other capped pair (~10deg apart in
+stock lotus); `lotusOrange`, `lotusOrange2` and `lotusYellow3` were already
+at their own gamut ceiling in the first cut of nami, so they're unchanged.
 
 ### Greens, aquas & teals
 
 | palette key | hex |
 |---|---|
-| `lotusGreen` | `#465d23` |
-| `lotusGreen2` | `#3e5e2f` |
-| `lotusAqua` | `#3b5c57` |
-| `lotusAqua2` | `#385d53` |
-| `lotusTeal1` | `#1c5d72` |
-| `lotusTeal2` | `#2e5982` |
-| `lotusTeal3` | `#3e5a68` |
+| `lotusGreen` | `#415f00` |
+| `lotusGreen2` | `#2b6200` |
+| `lotusAqua` | `#006158` |
+| `lotusAqua2` | `#006251` |
+| `lotusTeal1` | `#1a5d72` |
+| `lotusTeal2` | `#005898` |
+| `lotusTeal3` | `#3b5a6a` |
+
+`lotusTeal1`/`lotusTeal3` are the third capped pair (~6deg apart in stock
+lotus, the tightest of the three).
 
 ### Blues & violets
 
 | palette key | hex |
 |---|---|
-| `lotusBlue4` | `#3c5687` |
-| `lotusBlue5` | `#534d97` |
+| `lotusBlue4` | `#0046cb` |
+| `lotusBlue5` | `#5900e6` |
+| `lotusViolet4` | `#7600c6` |
+
+`lotusViolet1` (`ui.nontext`/whitespace) and `lotusViolet2` (`ui.special`)
+are UI chrome, not syntax roles that need to read apart from one another —
+pulling them toward the same gamut boundary as the syntax accents above
+crossed their much smaller chroma range through a neighbour's, so they (and
+`lotusInk2`, `ui.fg_dim`) keep the first cut's lightness-only values.
+
+| palette key | hex |
+|---|---|
 | `lotusViolet1` | `#585463` |
 | `lotusViolet2` | `#4a4062` |
-| `lotusViolet4` | `#624c82` |
 | `lotusInk2` | `#42416a` |
 
 ### Neutral accent
