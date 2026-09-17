@@ -19,21 +19,30 @@ local palette = {
 	lotusWhite5 = "#d5ceb4",
 
 	-- Syntax accents
-	lotusGray3 = "#61707b",
-	lotusGreen = "#60726a",
+	-- Comment/deprecated color, lightened further from the image cluster so it
+	-- actually recedes from body text (was contrast 1.6:1 against it, now ~2.3:1).
+	lotusGray3 = "#798994",
+	-- String color, re-saturated to the gamut boundary at the same hue/lightness
+	-- -- the image cluster left it almost gray (chroma 0.025 of a 0.110 ceiling).
+	lotusGreen = "#00815f",
 	lotusAqua = "#5d7277",
 	lotusBlue4 = "#3a6a85",
 	lotusBlue5 = "#275071",
 	lotusViolet4 = "#1a3959",
-	lotusRed = "#a94d36",
-	lotusOrange = "#a9523e",
-	lotusPink = "#a75939",
+	-- lotusRed/Orange/Pink/Yellow2/Red3/Orange2/Red2 were all within a 16deg
+	-- hue wedge in the original k-means cut (basically all "terracotta-brown"),
+	-- which read as too samey/yellowish. Spread apart across the same warm
+	-- family and re-saturated to the sRGB gamut boundary, hue chosen to also
+	-- match what each key's name implies (lotusPink now actually reads pink).
+	lotusRed = "#ca0043",
+	lotusOrange = "#b94400",
+	lotusPink = "#c9007f",
 	lotusYellow = "#5c732f",
-	lotusYellow2 = "#915f4e",
+	lotusYellow2 = "#946100",
 	lotusTeal1 = "#4c7988",
 	lotusTeal2 = "#497d96",
-	lotusRed3 = "#55463e",
-	lotusOrange2 = "#7c645a",
+	lotusRed3 = "#8b0038",
+	lotusOrange2 = "#876043",
 	lotusTeal3 = "#4d636a",
 	lotusAqua2 = "#547379",
 
@@ -42,7 +51,7 @@ local palette = {
 	-- on lotusWhite3. Re-derived from the Red Fuji clusters like the rest.
 	lotusGreen2 = "#5f7774",
 	lotusYellow3 = "#777262",
-	lotusRed2 = "#a4604f",
+	lotusRed2 = "#db0024",
 	lotusViolet1 = "#758889",
 }
 
