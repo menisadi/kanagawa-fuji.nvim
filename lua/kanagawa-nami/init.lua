@@ -43,8 +43,10 @@ local palette = {
 	lotusViolet4 = "#7600c6",
 	lotusInk2 = "#42416a",
 
-	-- Neutral accent
-	lotusGray3 = "#57564e",
+	-- Neutral accent. Comment/deprecated color -- the previous value was almost
+	-- exactly as light as body text (contrast 1.0:1, no dimming at all);
+	-- lightened so it actually recedes (~2.3:1 against body text now).
+	lotusGray3 = "#919087",
 
 	-- UI surface, not a syntax swatch: Search/CurSearch/IncSearch and the
 	-- Pmenu scrollbar thumb sit *under* lotusInk1 rather than being read as
