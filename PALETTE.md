@@ -34,26 +34,40 @@ from its nearest cluster, so the hue stays the one Hokusai used.
 
 | palette key | hex |
 |---|---|
-| `lotusGray3` | `#61707b` |
-| `lotusGreen` | `#60726a` |
+| `lotusGray3` | `#8b9ba6` |
+| `lotusGreen` | `#00815f` |
 | `lotusAqua` | `#5d7277` |
 | `lotusBlue4` | `#3a6a85` |
 | `lotusBlue5` | `#275071` |
 | `lotusViolet4` | `#1a3959` |
-| `lotusRed` | `#a94d36` |
-| `lotusOrange` | `#a9523e` |
-| `lotusPink` | `#a75939` |
+| `lotusRed` | `#ca0043` |
+| `lotusOrange` | `#b94400` |
+| `lotusPink` | `#c9007f` |
 | `lotusYellow` | `#5c732f` |
-| `lotusYellow2` | `#915f4e` |
+| `lotusYellow2` | `#946100` |
 | `lotusTeal1` | `#4c7988` |
 | `lotusTeal2` | `#497d96` |
+
+`lotusGray3` is the comment/deprecated color: the image cluster left it only
+~1.6:1 from body text (`lotusInk1`), barely receding. Lightened to ~2.9:1.
+
+`lotusGreen` is the string color (and, via `@string.documentation`'s fallback,
+docstrings): the image cluster left it almost gray (chroma 0.025 of a 0.110
+ceiling at that lightness). Re-saturated to the gamut boundary.
+
+`lotusRed`, `lotusOrange`, `lotusPink`, `lotusYellow2`, and (below)
+`lotusRed3`, `lotusOrange2`, `lotusRed2` were all within a 16deg hue wedge in
+the original k-means cut — one undifferentiated terracotta-brown. Spread
+across the same warm family and re-saturated to the gamut boundary, hue
+chosen to also match what each key's name implies (`lotusPink` now actually
+reads pink).
 
 ### Diagnostics
 
 | palette key | hex |
 |---|---|
-| `lotusRed3` | `#55463e` |
-| `lotusOrange2` | `#7c645a` |
+| `lotusRed3` | `#8b0038` |
+| `lotusOrange2` | `#876043` |
 | `lotusTeal3` | `#4d636a` |
 | `lotusAqua2` | `#547379` |
 
@@ -66,7 +80,7 @@ unmuted colors in the theme and put them below AA on `lotusWhite3`.
 |---|---|---|
 | `lotusGreen2` | `#5f7774` | added |
 | `lotusYellow3` | `#777262` | changed |
-| `lotusRed2` | `#a4604f` | removed |
+| `lotusRed2` | `#db0024` | removed |
 | `lotusViolet1` | `#758889` | line numbers, indent guides, inlay hints |
 
 `lotusViolet1` deliberately stops at 3.5:1 rather than 4.5:1 — line numbers
@@ -174,7 +188,11 @@ crossed their much smaller chroma range through a neighbour's, so they (and
 
 | palette key | hex |
 |---|---|
-| `lotusGray3` | `#57564e` |
+| `lotusGray3` | `#a3a299` |
+
+This is the comment/deprecated color. It was originally almost exactly as
+light as body text (`lotusInk1`) — ~1.0:1 contrast, no dimming at all.
+Lightened so comments actually recede (~2.9:1 against body text now).
 
 ### UI surface
 
